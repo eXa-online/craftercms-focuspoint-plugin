@@ -1,0 +1,83 @@
+# This file describes a plugin for use in CrafterCMS
+
+# The version of the format for this file
+descriptorVersion: 2
+
+# Describe the plugin
+plugin:
+  type: site
+  id: com.exa-online.plugin.focus-point
+  name: Imagic
+  tags:
+    - images
+    - focus point
+  version:
+    major: 1
+    minor: 0
+    patch: 0
+  description: A plugin that allows you to set focus points for images
+  documentation: "https://github.com/eXa-online/craftercms-focuspoint-plugin/main/README.md"
+  website:
+    name: Focus Point
+    url: https://github.com/eXa-online/craftercms-focuspoint-plugin
+  media:
+    screenshots:
+      - title: CrafterCMS
+        description: CrafterCMS Plugin for Focus Points
+        url: "https://github.com/eXa-online/craftercms-focuspoint-plugin/main/screenshot.png"
+  developer:
+    company:
+      name: eXa-online GmbH
+      email: sjaenichen@exa-online.com
+      url: https://github.com/eXa-online
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  crafterCmsVersions:
+    - major: 4
+      minor: 0
+      patch: 0
+    - major: 4
+      minor: 0
+      patch: 1
+    - major: 4
+      minor: 0
+      patch: 2
+    - major: 4
+      minor: 0
+      patch: 3
+    - major: 4
+      minor: 1
+      patch: 0
+    - major: 4
+      minor: 1
+      patch: 1
+    - major: 4
+      minor: 1
+      patch: 2
+    - major: 4
+      minor: 1
+      patch: 3
+  crafterCmsEditions:
+    - community
+    - enterprise
+  installation:
+    - type: form-control
+      elementXpath: //control/plugin[pluginId='com.exa-online.plugin.focus-point']
+      element:
+        name: control
+        children:
+          - name: plugin
+            children:
+              - name: pluginId
+                value: com.exa-online.plugin.focus-point
+              - name: type
+                value: control
+              - name: name
+                value: Imagic
+              - name: filename
+                value: main.js
+          - name: icon
+            children:
+              - name: class
+                value: fa-picture-o
