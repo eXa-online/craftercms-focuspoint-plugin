@@ -32,12 +32,12 @@ CStudioForms.Controls.Imagic =
     this.crop_dialog = null;
     this.validExtensions = ['jpg', 'jpeg', 'gif', 'png', 'tiff', 'tif', 'bmp', 'svg', 'jp2', 'jxr', 'webp'];
     this.readonly = readonly;
-    this.focuspoint_x = 0.0;
-    this.focuspoint_y = 0.0;
-    this.originalWidth = null;
-    this.originalHeight = null;
     this.predefinedFocuspointX = 0.5;
     this.predefinedFocuspointY = 0.5;
+    this.focuspoint_x = this.predefinedFocuspointX;
+    this.focuspoint_y = this.predefinedFocuspointY;
+    this.originalWidth = null;
+    this.originalHeight = null;
     this.previewBoxHeight = 100;
     this.previewBoxWidth = 300;
     this.external = null;
@@ -724,15 +724,18 @@ YAHOO.extend(CStudioForms.Controls.Imagic, CStudioForms.CStudioFormField, {
         var startindex = _value.indexOf("focuspoint_x=");
         var endindex = _value.indexOf("&focuspoint_y=");
         if (startindex >= 0 && endindex >= 0) {
-          var fp_x = parseFloat(_value.substring(startindex + 13, endindex));
-          var fp_y = parseFloat(_value.substring(endindex + 14));
-          this._updateFocusPoint(fp_x, fp_y);
-          this._updateReticlePosition(document.getElementById('focuspoint-target-overlay'), fp_x, fp_y, true);
+          self.focuspoint_x = parseFloat(_value.substring(startindex + 13, endindex));
+          self.focuspoint_y = parseFloat(_value.substring(endindex + 14));
+          this._updateFocusPoint(self.focuspoint_x, self.focuspoint_y);
+          this._updateReticlePosition(document.getElementById('focuspoint-target-overlay'), self.focuspoint_x, self.focuspoint_y, true);
         }
         _value = _value.substring(0, index);
       }
+      else {
+        self.focuspoint_x = self.predefinedFocuspointX;
+        self.focuspoint_y = self.predefinedFocuspointY;
+      }
     }
-    
     var _self = this;
     this.value = _value;
     this.remote = attribute === true ? true : false;
@@ -766,7 +769,6 @@ YAHOO.extend(CStudioForms.Controls.Imagic, CStudioForms.CStudioFormField, {
       function imageLoaded() {
         _self.originalWidth = this.width;
         _self.originalHeight = this.height;
-
         _self._updateReticlePosition(document.getElementById('focuspoint-target-overlay'), _self.focuspoint_x, _self.focuspoint_y, true);
       }
       image.addEventListener('load', imageLoaded, false);
